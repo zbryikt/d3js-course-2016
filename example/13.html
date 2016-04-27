@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<body>
+<svg width="100%" height="100%">
+</svg>
+</body>
+<script src="d3.min.js"></script>
+<script>
+
+d3.select("body").transition().duration(2000).tween("blah",function() {
+  return function(t) {
+    d3.select(this).text(
+    d3.interpolate(
+      "1鄉2里共3夫子，不識4書5經6義，竟敢教789子，10分大膽",
+      "10室9貧，湊得8兩7錢6分5毫4厘，尚且3心2意，1等下流")(t)
+    );
+  };
+});
+</script>

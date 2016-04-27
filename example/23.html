@@ -1,0 +1,36 @@
+<body>
+<svg width="100%" height="100%">
+</svg>
+</body>
+<script src="d3.min.js"></script>
+<script>
+
+var data = d3.range(20).map(function(it) {
+  return {
+    value: parseInt(Math.random() * 9 + 1),
+    category: "ABC".charAt(parseInt(Math.random() * 3))
+  };
+});
+var entries = d3.nest().key(function(it) { return it.category; }).entries(data,d3.map);
+var root = {values: entries};
+var nodes = d3.layout.pack()
+   .size([800, 400])
+   .children(function(it) {
+     return it.values;
+   })
+   .nodes(root)
+var color = d3.scale.category20();
+
+d3.select("svg")
+  .selectAll("circle")
+  .data(data)
+  .enter().append("circle")
+    .attr({
+      cx: function(it) { return it.x; },
+      cy: function(it) { return it.y; },
+      r:  function(it) { return it.r; },
+      fill: function(d,i) { return color(d.category); },
+      stroke: "#000"
+    });
+
+</script>

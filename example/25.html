@@ -1,0 +1,47 @@
+<body>
+<svg width="100%" height="100%">
+</svg>
+</body>
+<script src="d3.min.js"></script>
+<script>
+
+var data = d3.range(20).map(function(it) {
+  return {
+    value: parseInt(Math.random() * 9 + 1),
+    category: "ABC".charAt(parseInt(Math.random() * 3))
+  };
+});
+
+var color = d3.scale.category20();
+
+d3.select("svg")
+  .selectAll("circle")
+  .data(data)
+  .enter().append("circle");
+
+function render() {
+  for(var i=0;i<data.length;i++) {
+    n = data[i];
+    dx = 400 - n.x;
+    dy = 200 - n.y;
+    len = Math.sqrt(dx * dx + dy * dy );
+    n.x -= dy / len;
+    n.y += dx / len;
+  }
+  d3.select("svg")
+    .selectAll("circle")
+      .attr({
+        cx: function(it) { return it.x; },
+        cy: function(it) { return it.y; },
+        r:  function(it) { return it.value; },
+        fill: function(d,i) { return color(d.category); },
+        stroke: "#000"
+      });
+}
+
+var force = d3.layout.force()
+  .size([800, 400])
+  .nodes(data)
+  .on("tick", render)
+  .start();
+</script>

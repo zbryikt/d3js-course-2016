@@ -1,0 +1,29 @@
+<body>
+<svg width="100%" height="100%">
+</svg>
+</body>
+<script src="d3.min.js"></script>
+<script>
+
+function bind(???) {
+  var update = d3.select("svg").selectAll("rect").???;
+  update.enter().append("rect");
+  update.exit().remove();
+}
+
+function render(???) {
+  d3.select("svg").selectAll("rect").???.attr({
+    x: function(d,i) { return i * 12; },
+    y: 10,
+    width: 10,
+    height: function(d,i) { return d * 10; },
+    fill: "red"
+  });
+}
+
+bind(???);
+render(???);
+bind(???);
+render(???);
+
+</script>

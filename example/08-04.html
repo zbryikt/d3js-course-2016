@@ -1,0 +1,17 @@
+<body><svg width="100%" height="100%"></svg></body>
+<script src="d3.min.js"></script> <script>
+var data = [3,1,4,1,5,9,2,6,5];
+d3.select("svg").selectAll("circle").data(data).enter().append("circle").attr({
+  cx: function(d,i) { return Math.cos(i * Math.PI * 2 / data.length) * 80 + 120;},
+  cy: function(d,i) { return Math.sin(i * Math.PI * 2 / data.length) * 80 + 120;},
+  r: function(d,i) { return d * 3; },
+  fill: "red"
+});
+
+d3.select("svg").selectAll("text").data(data).enter().append("text").attr({
+  x: function(d,i) { return Math.cos(i * Math.PI * 2 / data.length) * (75 - d * 3) + 120 - 5;},
+  y: function(d,i) { return Math.sin(i * Math.PI * 2 / data.length) * (75 - d * 3) + 120 + 5;},
+  r: function(d,i) { return d * 3; },
+  fill: "black"
+}).text(function(d,i) { return d; });
+</script>

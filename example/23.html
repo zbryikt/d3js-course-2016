@@ -11,7 +11,7 @@ var data = d3.range(20).map(function(it) {
     category: "ABC".charAt(parseInt(Math.random() * 3))
   };
 });
-var entries = d3.nest().key(function(it) { return it.category; }).entries(data,d3.map);
+var entries = d3.nest().key(function(it) { return it.category; }).entries(data);
 var root = {values: entries};
 var nodes = d3.layout.pack()
    .size([800, 400])
